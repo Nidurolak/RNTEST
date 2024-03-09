@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 function App(): React.JSX.Element {
   return (<NavigationContainer>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Main" component={Main} />
+      <Stack.Screen name="main" component={Main} />
       <Stack.Screen name="test0" component={test0} />
       <Stack.Screen name="test1" component={test1} />
     </Stack.Navigator>
