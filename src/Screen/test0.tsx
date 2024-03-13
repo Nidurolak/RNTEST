@@ -1,40 +1,50 @@
 
 
-import React from 'react';
-import type { PropsWithChildren } from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
 import styled from 'styled-components/native';
-import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    useColorScheme,
-    View,
-} from 'react-native';
+import { Text, View, } from 'react-native';
+import { RootStackParam } from '../utils/types';
 
-import {
-    Colors,
-    DebugInstructions,
-    Header,
-    LearnMoreLinks,
-    ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import { RootStackParam } from './main';
+function Test0(): React.JSX.Element {
+  const [numtest, setNumtest] = useState(0)
 
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParam>>();
+
+  const BTNActive = () => {
+    setNumtest((prevNum) => prevNum + 1)
+    navigation.navigate('test1')
+  }
+
+
+  return (
+    <Container>
+      <CenteredButton onPress={BTNActive}>
+        <ButtonText>버튼</ButtonText>
+      </CenteredButton>
+      <CenteredButton onPress={() => navigation.goBack()}>
+        <ButtonText>메인으로 뒤돌아가기</ButtonText>
+      </CenteredButton>
+      <View>
+        <Text>{numtest}</Text>
+      </View>
+    </Container>)
+}
+
+export default Test0
 
 const Container = styled.View`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const CenteredButton = styled.TouchableOpacity`
-  background-color: #3498db;
+  background-color: blue;
   padding: 10px 20px;
   border-radius: 5px;
 `;
@@ -43,24 +53,3 @@ const ButtonText = styled.Text`
   color: white;
   font-size: 18px;
 `;
-
-function Test0(): React.JSX.Element {
-
-    const isDarkMode = useColorScheme() === 'dark';
-    const backgroundStyle = {
-        backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    };
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackParam>>();
-
-
-    return (
-        <SafeAreaView style={backgroundStyle}>
-            <Container>
-                <CenteredButton onPress={() => navigation.navigate('test1')}>
-                    <ButtonText>버튼</ButtonText>
-                </CenteredButton>
-            </Container>
-        </SafeAreaView>)
-}
-
-export default Test0
