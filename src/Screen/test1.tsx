@@ -20,14 +20,21 @@ function Test1(): React.JSX.Element {
     setNumtest((prevNum) => prevNum + 1)
     navigation.push('test1')
   }
+  const BTNActive1 = () => {
+    setNumtest((prevNum) => prevNum + 1)
+    navigation.navigate('test1')
+  }
 
   return (
     <Container>
       <CenteredButton onPress={BTNActive}>
-        <ButtonText>팝투탑버튼</ButtonText>
+        <ButtonText>팝투탑버튼 + 숫자 더하기</ButtonText>
       </CenteredButton>
       <CenteredButton onPress={BTNActive0}>
-        <ButtonText>푸쉬 제자리 버튼</ButtonText>
+        <ButtonText>푸쉬 제자리 버튼 + 숫자 더하기</ButtonText>
+      </CenteredButton>
+      <CenteredButton onPress={BTNActive1}>
+        <ButtonText>네비 제자리 버튼 + 숫자 더하기</ButtonText>
       </CenteredButton>
       <CenteredButton onPress={() => navigation.goBack()}>
         <ButtonText>뒤돌아가기</ButtonText>

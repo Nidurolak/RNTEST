@@ -17,11 +17,10 @@ function Test0(): React.JSX.Element {
     navigation.navigate('test1')
   }
 
-
   return (
     <Container>
       <CenteredButton onPress={BTNActive}>
-        <ButtonText>버튼</ButtonText>
+        <ButtonText>test1 이동 + 숫자 더하기</ButtonText>
       </CenteredButton>
       <CenteredButton onPress={() => navigation.goBack()}>
         <ButtonText>메인으로 뒤돌아가기</ButtonText>
