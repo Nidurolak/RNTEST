@@ -4,3 +4,6 @@ export type RootStackParam = {
     test0: undefined;
     test1: undefined;
 };
+export type TestFormData = {
+    content: string
+}
