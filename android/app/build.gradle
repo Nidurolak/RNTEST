@@ -108,6 +108,9 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation("com.facebook.react:flipper-integration")
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "androidx.appcompat:appcompat:1.0.0"
+    implementation "com.facebook.react:react-native:+"  // From node_modules
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

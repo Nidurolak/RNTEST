@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+/*import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const setlocalAsyncStorage = async (key :string, value :any) => {
   try {
@@ -61,4 +61,4 @@ export const setlocalAsyncStorage = async (key :string, value :any) => {
     } catch (e: any) {
       console.error(e.message);
     }
-  };
+  };*/
