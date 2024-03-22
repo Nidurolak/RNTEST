@@ -2,10 +2,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView as OriginalSafeAreaView, Text, View, } from 'react-native';
+import { SafeAreaView as OriginalSafeAreaView, TouchableWithoutFeedback, Text, View, Keyboard, } from 'react-native';
 import styled from 'styled-components/native';
 import { RootStackParam, TestFormData } from '../utils/types';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { getlocalAsyncStorage, setlocalAsyncStorage } from '../utils/infos/localStorage';
 //import { containsKey, getData, getlocalAsyncStorage, setlocalAsyncStorage, storeData } from '../utils/infos/localStorage';
 
 
@@ -23,7 +24,7 @@ function Main(): React.JSX.Element {
   //공식 문서 참고 구조
   const onSubmit: SubmitHandler<TestFormData> = (data) => {
     setTextvalue(data.content);
-    //setlocalAsyncStorage('test', data.content)
+    setlocalAsyncStorage('test', data.content)
     /*async (): Promise<boolean> => {
       const hasdata = await containsKey('test');
       if (!hasdata) {
@@ -40,40 +41,42 @@ function Main(): React.JSX.Element {
   useEffect(() => {
     //console.log(getlocalAsyncStorage('test'))
     /*const getDatas = async (): Promise<string> => {
-      const data = await getData("test");
+      const data = await getlocalAsyncStorage("test");
       return data
     }*/
-    //asyncText = getDatas
+    asyncText = getlocalAsyncStorage("test");
   }, [])
   return (
-    <Container>
-      <CenteredButton onPress={BTNActive}>
-        <ButtonText>버튼</ButtonText>
-      </CenteredButton>
-      <View>
-        <Text>{numtest}</Text>
-      </View>
-      <Text>현재 저장된 값 : {textvalue}</Text>
-      <Text>초기 에이싱크 값 : {asyncText}</Text>
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <Input
-            placeholder="저장 내용"
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-        name="content"
-      />
-      <CenteredButton onPress={handleSubmit(onSubmit)}>
-        <ButtonText>입력</ButtonText>
-      </CenteredButton>
-    </Container>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        <CenteredButton onPress={BTNActive}>
+          <ButtonText>버튼</ButtonText>
+        </CenteredButton>
+        <View>
+          <Text>{numtest}</Text>
+        </View>
+        <Text>현재 저장된 값 : {textvalue}</Text>
+        <Text>초기 에이싱크 값 : {asyncText}</Text>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              placeholder="저장 내용"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
+          name="content"
+        />
+        <CenteredButton onPress={handleSubmit(onSubmit)}>
+          <ButtonText>입력</ButtonText>
+        </CenteredButton>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
 
