@@ -14,6 +14,7 @@ function Main(): React.JSX.Element {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParam>>();
   const [numtest, setNumtest] = useState(0)
   const [textvalue, setTextvalue] = useState('')
+  const [asyncText, setasyncText] = useState('저장된 초기값이 없습니다.')
   const { control, handleSubmit, formState: { errors } } = useForm<TestFormData>();
 
   const BTNActive = () => {
@@ -33,18 +34,36 @@ function Main(): React.JSX.Element {
       }
       return false
     }*/
+    console.log("클릭됨" + "메인 line 36번")
+    console.log(data.content + "메인 line 37번")
+    console.log(getlocalAsyncStorage('test') + "메인 line 38번")
   };
 
 
 
-  var asyncText;
   useEffect(() => {
+    //실패한 방식, async로 비동기 호출을 진행하지 않아 값을 받지 못한 상태로 로직이 진행됨
     //console.log(getlocalAsyncStorage('test'))
     /*const getDatas = async (): Promise<string> => {
       const data = await getlocalAsyncStorage("test");
       return data
     }*/
-    asyncText = getlocalAsyncStorage("test");
+
+
+
+    //console.log(getlocalAsyncStorage('test') + "메인 line 50번")
+    //console.log("zzzzz" + "메인 line 51번")
+    //asyncText = getlocalAsyncStorage('test') as any;
+
+
+
+    const fetchData = async () => {
+      const data = await getlocalAsyncStorage('test');
+      console.log(data + "메인 line 50번");
+      setasyncText(data as string)
+    };
+
+    fetchData();
   }, [])
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
